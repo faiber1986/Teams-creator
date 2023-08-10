@@ -1,0 +1,61 @@
+.formulario {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.formulario form {
+    width: 80%;
+    background-color: rgb(224, 221, 218);
+    border-radius: 1rem 0rem 1rem 0rem;
+    box-shadow: 0.5rem 0.5rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 5rem 1rem 1rem 1rem;
+}
+
+.inputs label {
+    display: block;
+    text-align: left;
+    margin-left: 0.5rem;
+}
+
+.inputs input {
+    display: block;
+    text-align: left;
+    width: 100%;
+    border: none;
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 1rem 1rem 1rem 0rem;
+    box-sizing: border-box;
+}
+
+.options label {
+    display: block;
+    text-align: left;
+    margin-left: 0.5rem;
+}
+
+.options select {
+    display: block;
+    text-align: left;
+    width: 100%;
+    border: none;
+    padding: 1rem 1rem;
+    margin: 1rem 1rem 1rem 0rem;
+    background-color: white;
+}
+
+.create {
+    margin: 1rem 1rem 1rem 1rem;
+    font-size: large;
+    height: 2rem;
+    width: 10rem;
+    background-color: black;
+    color: aliceblue;
+    font-weight: 600;
+    cursor: grab;
+}
+
+.create:hover {
+    color: red;
+}
