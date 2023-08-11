@@ -1,10 +1,22 @@
 import './Formulario.css'
 import PropTypes from "prop-types"
+import { useState } from 'react'
 
 export const Formulario = () => {
 
+    const [name, setName] = useState()
+    const [position, setPosition] = useState()
+    const [photo, setPhoto] = useState()
+    const [team, setTeam] = useState()
+
     const sendForm = ( event ) => {
         event.preventDefault()
+        let sendData = {
+            name,
+            position,
+            photo, 
+            team
+        }
     }
 
     return (
@@ -12,10 +24,25 @@ export const Formulario = () => {
             <section className='formulario'>
                 <form onSubmit={ sendForm }>
                     <h2>Enter member information</h2>
-                    <Inputs title='Name' placeholder='Input full name' />
-                    <Inputs title='Position' placeholder='Input position' />
-                    <Inputs title='Photo' placeholder='Photo URL' />
-                    <ListaOpciones />
+                    <Inputs 
+                        title='Name' 
+                        placeholder='Input full name' 
+                        value={name} 
+                        changeValue={ setName } 
+                    />
+                    <Inputs 
+                        title='Position' 
+                        laceholder='Input position' 
+                        value={position} 
+                        changeValue={ setPosition } 
+                    />
+                    <Inputs 
+                        title='Photo' 
+                        placeholder='Photo URL' 
+                        value={photo} 
+                        changeValue={ setPhoto } 
+                    />
+                    <ListaOpciones value={team} changeValue={setTeam}/>
                     <Boton title='Create Member' />
                 </form>
             </section>
@@ -24,12 +51,25 @@ export const Formulario = () => {
 }
 
 export const Inputs = ({ title, placeholder }) => {
+
+    const [value, setValue] = useState()
+
+    const changeValue = ( event ) => {
+        setValue(event.target.value)
+    }
+
     const modifiedPlaceholder = `${placeholder} . . .`
+
     return (
         <>
             <div className='inputs'>
                 <label htmlFor="">{title}</label>
-                <input type="text" placeholder={modifiedPlaceholder} />
+                <input 
+                    type="text" 
+                    placeholder={modifiedPlaceholder} 
+                    value={ value } 
+                    onChange={ changeValue }
+                 />
             </div>
         </>
     )
@@ -40,7 +80,7 @@ Inputs.propTypes = {
     placeholder: PropTypes.string.isRequired,
 }
 
-export const ListaOpciones = () => {
+export const ListaOpciones = ({ value }) => {
 
     const equipos = [
         'Front End',
@@ -54,10 +94,11 @@ export const ListaOpciones = () => {
         <>
             <div className='options'>
                 <label htmlFor="">Team</label>
-                <select name="" id="">
+                <select value={ value } onChange={ changeValue }>
+                    <option value="" disabled defaultValue='' hidden >Select team</option>
                     { equipos.map( (equipo, index) => {
                         return (
-                            <option key={ index }>{ equipo }</option>
+                            <option key={ index } value={ equipo }>{ equipo }</option>
                         )
                     })}
                 </select>

@@ -1,20 +1,23 @@
 import './Org.css'
+import { Formulario } from "../formulario/Formulario";
 import { useState } from "react";
 
 
-const [showForm, updateShow] = useState( true )
 
-const changeShow = () => {
-    updateShow(!showForm)
-}
+export const Org = ( ) => {
 
-export const Org = ( {changeShow} ) => {
+  const [showForm, updateShow] = useState( true )
+
+  const changeShow = () => {
+      updateShow(!showForm)
+  }
     return (
       <>
         <section className='org'>
             <h1>My Staff</h1>
-            <img src="/public/staff.png" alt="icon" onClick={ changeShow }/>
+            <img src="/staff.png" alt="icon" onClick={ changeShow }/>
         </section>
+        { ( !showForm ) ? <Formulario /> : null }
       </>
     )
   }
