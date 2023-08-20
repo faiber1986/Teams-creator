@@ -1,5 +1,5 @@
 import './Org.css'
-import { Formulario } from "../formulario/Formulario";
+import { Form } from "../form/Form";
 import { useState } from "react";
 
 
@@ -15,9 +15,12 @@ export const Org = ( ) => {
       <>
         <section className='org'>
             <h1>My Staff</h1>
-            <img src="/staff.png" alt="icon" onClick={ changeShow }/>
+            <div>
+                <h3>Click on icon to add member</h3>
+                <img src="/staff.png" alt="icon" onClick={ changeShow }/>
+            </div>
         </section>
-        { ( !showForm ) ? <Formulario /> : null }
+        { ( !showForm ) ? <Form /> : null }
       </>
     )
   }

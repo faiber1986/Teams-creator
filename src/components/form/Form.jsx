@@ -1,13 +1,15 @@
-import './Formulario.css'
+import './Form.css'
 import PropTypes from "prop-types"
 import { useState } from 'react'
 
-export const Formulario = () => {
-
+export const Form = (props) => {
+ 
     const [name, setName] = useState()
     const [position, setPosition] = useState()
     const [photo, setPhoto] = useState()
     const [team, setTeam] = useState()
+ 
+    const { memberRegister } = props
 
     const sendForm = ( event ) => {
         event.preventDefault()
@@ -17,8 +19,9 @@ export const Formulario = () => {
             photo, 
             team
         }
+        memberRegister(sendData)
     }
-
+ 
     return (
         <>
             <section className='formulario'>
@@ -32,7 +35,7 @@ export const Formulario = () => {
                     />
                     <Inputs 
                         title='Position' 
-                        laceholder='Input position' 
+                        placeholder='Input position' 
                         value={position} 
                         changeValue={ setPosition } 
                     />
@@ -49,17 +52,17 @@ export const Formulario = () => {
         </>
     )
 }
-
+ 
 export const Inputs = ({ title, placeholder }) => {
-
+ 
     const [value, setValue] = useState()
-
+ 
     const changeValue = ( event ) => {
         setValue(event.target.value)
     }
-
+ 
     const modifiedPlaceholder = `${placeholder} . . .`
-
+ 
     return (
         <>
             <div className='inputs'>
@@ -74,14 +77,18 @@ export const Inputs = ({ title, placeholder }) => {
         </>
     )
 }
-
+ 
 Inputs.propTypes = {
     title: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
 }
-
+ 
 export const ListaOpciones = ({ value }) => {
-
+ 
+    const changeValue = ( event ) => {
+        setValue(event.target.value)
+    }
+ 
     const equipos = [
         'Front End',
         'Back End',
@@ -103,14 +110,14 @@ export const ListaOpciones = ({ value }) => {
                     })}
                 </select>
             </div>
-
+ 
         </>
     )
 }
-
-
+ 
+ 
 export const Boton = ( { title } ) => {
     return (
-        <button className='create'> { title } </button>
+        <button className='create' > { title } </button>
     )
   }
