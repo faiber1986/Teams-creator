@@ -11,6 +11,11 @@ export const Org = ( ) => {
   const changeShow = () => {
       updateShow(!showForm)
   }
+
+  const memberRegister = (member) => {
+    console.log('Nuevo colaborador: ', member)
+  }
+
     return (
       <>
         <section className='org'>
@@ -20,7 +25,8 @@ export const Org = ( ) => {
                 <img src="/staff.png" alt="icon" onClick={ changeShow }/>
             </div>
         </section>
-        { ( !showForm ) ? <Form /> : null }
+        { ( !showForm ) ? <Form 
+            memberRegister = { memberRegister }/> : null }
       </>
     )
   }

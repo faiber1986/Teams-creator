@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Header } from './components/header/Header'
 import { Org } from './components/Org/Org'
 import { Team } from './components/team/Team'
+import { Footer } from './components/footer/Footer'
 
 
 const equipos = [
@@ -37,16 +38,10 @@ const equipos = [
   }
 ]
 
-
-
 export const App = () => {
 
   // Register member
   const [member, setMember] = useState([])
-
-  const memberRegister = (member) => {
-    setMember([...member, member])
-  }
 
   return (
     <>
@@ -54,8 +49,9 @@ export const App = () => {
       <Org />
       {
         equipos.map((team) => (<Team data={team} key={team.title} 
-        memberRegister = { memberRegister }/>))
+        />))
       }
+      <Footer />
     </>
   )
 }
