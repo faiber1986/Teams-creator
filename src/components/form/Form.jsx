@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Button } from '../button/Button'
-import { Inputs } from '../inputs/Inputs'
+import { Input } from '../input/Input'
 import { OptionList } from '../option-list/OptionList'
 import './Form.css'
 import { AddTeam } from '../add-team/AddTeam'
+import { AddTeamForm } from '../add-team-form/AddTeamForm'
 
 export const Form = (props) => {
 
@@ -12,11 +13,16 @@ export const Form = (props) => {
     const [position, setPosition] = useState('')
     const [photo, setPhoto] = useState('')
     const [team, setTeam] = useState('')
-    const [teamName, setTeamName] = useState('')
-    const [teamColor, setTeamColor] = useState('')
+    const [showFormTeam, setShowFormTeam] = useState(false)
 
+    // Function to show or hidde team form
+    const changeShowTeam = () => {
+        setShowFormTeam(!showFormTeam)
+    }
 
-    const { memberRegister, createTeam } = props
+    const { memberRegister, createTeam, teams } = props
+
+    console.log(props)
 
     const sendForm = (event) => {
         event.preventDefault()
@@ -29,31 +35,26 @@ export const Form = (props) => {
         memberRegister(sendData)
     }
 
-    const sendTeam = (event) => {
-        event.preventDefault()
-        createTeam({ title:teamName, background_color:teamColor })
-    }
-
     return (
         <>
             <section className='form'>
                 <form onSubmit={sendForm}>
                     <h2>Enter member information</h2>
-                    <Inputs
+                    <Input
                         title='Name'
                         placeholder='Input full name'
                         required
                         value={name}
                         setValue={setName}
                     />
-                    <Inputs
+                    <Input
                         title='Position'
                         placeholder='Input position'
                         required
                         value={position}
                         setValue={setPosition}
                     />
-                    <Inputs
+                    <Input
                         title='Photo'
                         placeholder='Photo URL'
                         required
@@ -63,28 +64,17 @@ export const Form = (props) => {
                     <OptionList
                         value={team}
                         setTeam={setTeam}
+                        teams={teams}
                     />
                     <Button title='Create Member' />
-                    <AddTeam />
                 </form>
-                <form onSubmit={sendTeam}>
-                    <h2>Enter team information</h2>
-                    <Inputs
-                        title='Team Name'
-                        placeholder='Input team name'
-                        required
-                        value={teamName}
-                        setValue={setTeamName}
+                <AddTeam changeShowTeam={changeShowTeam} />
+                {
+                    showFormTeam && <AddTeamForm
+                        createTeam={createTeam}    
                     />
-                    <Inputs
-                        title='Team color'
-                        placeholder='Input team color in Hex format'
-                        required
-                        value={teamColor}
-                        setValue={setTeamColor}
-                    />
-                    <Button title='Create Team' />
-                </form>
+                }
+
             </section>
         </>
     )

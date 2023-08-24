@@ -1,10 +1,10 @@
 import './Member.css';
 import { MdCancel } from "react-icons/md";
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
-export const Member = (props) => {
+export const Member = ({ background_color, deleteMember, like, data }) => {
 
-  const { name, position, photo, id} = props.data
-  const { background_color, deleteMember } = props
+  const { name, position, photo, id, fav } = data
 
   const border = {
     backgroundColor: background_color
@@ -19,6 +19,9 @@ export const Member = (props) => {
       <div className='info'>
         <h4>{name}</h4>
         <h5>{position}</h5>
+        <div className='like'>
+          {fav ? <AiFillLike className='icon-like' color='green' onClick={() => like(id)} /> : <AiOutlineLike className='icon-like' onClick={() => like(id)} />}
+        </div>
       </div>
     </div>
   )

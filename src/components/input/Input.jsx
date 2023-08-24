@@ -1,7 +1,8 @@
 import PropTypes from "prop-types"
-import { useState } from "react"
 
-export const Inputs = (props) => {
+export const Input = (props) => {
+
+    const { type='text' } = props
 
     const sendChange = (event) => {
         props.setValue(event.target.value)
@@ -11,10 +12,10 @@ export const Inputs = (props) => {
 
     return (
         <>
-            <div className='inputs'>
+            <div className={`input_input_${type}`}>
                 <label htmlFor="">{props.title}</label>
                 <input
-                    type="text"
+                    type={type}
                     placeholder={modifiedPlaceholder}
                     required={props.required}
                     value={props.value}
@@ -25,7 +26,7 @@ export const Inputs = (props) => {
     )
 }
 
-Inputs.propTypes = {
+Input.propTypes = {
     title: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
 }

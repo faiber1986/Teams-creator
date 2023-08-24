@@ -2,10 +2,9 @@ import { Member } from '../member/Member';
 import hexToRgba from 'hex-to-rgba';
 import './Team.css'
 
-export const Team = (props) => {
+export const Team = ({ members, deleteMember, updateBGColor, like, data }) => {
 
-    const { title, background_color, id } = props.data;
-    const { members, deleteMember, updateBGColor } = props
+    const { title, background_color, id } = data;
 
     const background = {
         backgroundColor: hexToRgba(background_color, 0.25)
@@ -29,6 +28,7 @@ export const Team = (props) => {
               key={index} 
               background_color={background_color}
               deleteMember={deleteMember}
+              like={like}
               />)
           }
         </div>

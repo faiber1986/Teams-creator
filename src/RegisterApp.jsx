@@ -8,21 +8,24 @@ import { v4 as uuidv4 } from "uuid";
 
 export const RegisterApp = () => {
 
-    const [showForm, useShowForm] = useState(true)
+    const [showForm, setShowForm] = useState(true)
+
     const [members, setMembers] = useState([
         {
         id: uuidv4(),
         team: 'Front End',
         photo: 'https://scontent.feoh4-3.fna.fbcdn.net/v/t31.18172-8/16177507_10154288561473310_8911166474959536167_o.jpg?_nc_cat=105&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHzAyXpt1UJfvZmbVw2vUnK5gsxtTAIaZrmCzG1MAhpmnBk9danWD6n0EKnMohUu7c&_nc_ohc=s1JFikrxnwwAX_ECmuB&_nc_ht=scontent.feoh4-3.fna&oh=00_AfC2LpmvNHhhySkGn8PpwRGNT8pA3gM08G6Lr6vjoANIVA&oe=650E11C5',
         name: 'Andres Montes',
-        position: 'Sr React Developer'
+        position: 'Sr React Developer',
+        fav: true
         },
         {
             id: uuidv4(),
             team: 'Back End',
             photo: 'https://scontent.feoh4-4.fna.fbcdn.net/v/t1.6435-9/172539840_4198226353562309_691095403147225271_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeFdH-NQHbfDYpHSONbqds4X_aIZvzT1bT_9ohm_NPVtP1gCTPbumr-seuXqJscJJS8&_nc_ohc=crdKaN_dfb8AX-XE4jl&_nc_ht=scontent.feoh4-4.fna&oh=00_AfA-tCyr8uZ8gIuAiQKW0FFz0KaPFEZQJkX1ixNwDsYg4w&oe=650E3107',
             name: 'Robinson Montes',
-            position: 'Sr Python Developer'
+            position: 'Sr Python Developer',
+            fav: false
         }
     ])
 
@@ -61,7 +64,7 @@ export const RegisterApp = () => {
 
     // Function to show or hidde form
     const changeShow = () => {
-        useShowForm(!showForm)
+        setShowForm(!showForm)
     }
 
     // Function to register member
@@ -91,6 +94,17 @@ export const RegisterApp = () => {
         setTeams([...teams, { ...newTeam, id: uuidv4() }])
     }
 
+    const like = (id) => {
+        console.log('like', id)
+        const updateMembers = members.map((member) => {
+            if(member.id === id){
+                member.fav = !member.fav
+            }
+            return member
+        })
+        setMembers(updateMembers)
+    }
+
     return (
         <>
             <Header />
@@ -109,6 +123,7 @@ export const RegisterApp = () => {
                     members={members.filter( member => member.team === team.title)}
                     deleteMember={deleteMember}
                     updateBGColor={updateBGColor}
+                    like={like}
                     />))
             }
             <Footer />

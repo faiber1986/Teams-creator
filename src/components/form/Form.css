@@ -14,13 +14,13 @@
     margin: 1rem 2rem 1rem 2rem;
 }
 
-.inputs label {
+.input_input_text label {
     display: block;
     text-align: left;
     margin-left: 0.5rem;
 }
 
-.inputs input {
+.input_input_text input{
     display: block;
     text-align: left;
     width: 100%;
@@ -44,4 +44,31 @@
     padding: 1rem 1rem;
     margin: 1rem 1rem 1rem 0rem;
     background-color: white;
+}
+
+.input_input_color {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.input_input_color label {
+    display: block;
+    text-align: left;
+    margin-left: 0.5rem;
+}
+
+.input_input_color input {
+    margin-left: 2rem;
+}
+
+.like {
+    display: flex;
+    justify-content: center;
+}
+
+.icon-like {
+    width: 1.5rem;
+    height: 1.5rem;
 }
