@@ -1,20 +1,37 @@
 import { Member } from '../member/Member';
+import hexToRgba from 'hex-to-rgba';
 import './Team.css'
 
-export const Team = ( {data} ) => {
+export const Team = (props) => {
 
-    const { title, background_color, border_color } = data;
+    const { title, background_color, id } = props.data;
+    const { members, deleteMember, updateBGColor } = props
+
     const background = {
-        backgroundColor: background_color
+        backgroundColor: hexToRgba(background_color, 0.25)
     }
 
-  return (
+  return <>{ members.length > 0 &&
     <section className='team' style={ background }>
-        <h2 className='title'>{ title }</h2>
+        <input 
+          className='input-color'
+          type="color"
+          value={background_color}
+          onChange={ (event) => {
+            updateBGColor(event.target.value, id)
+          }}
+        />
+        <h2 className='title' >{ title }</h2>
         <div className='member'>
-          <Member />
-          <Member />
+          {
+            members.map( (member, index) => <Member 
+              data={member} 
+              key={index} 
+              background_color={background_color}
+              deleteMember={deleteMember}
+              />)
+          }
         </div>
     </section>
-  )
+  }</>
 }

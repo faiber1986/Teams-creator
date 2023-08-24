@@ -1,20 +1,22 @@
-import './Form.css'
-import PropTypes from "prop-types"
 import { useState } from 'react'
+import { Button } from '../button/Button'
+import { Inputs } from '../inputs/Inputs'
+import { OptionList } from '../option-list/OptionList'
+import './Form.css'
+import { AddTeam } from '../add-team/AddTeam'
 
 export const Form = (props) => {
 
-    const [name, setName] = useState()
-    const [position, setPosition] = useState()
-    const [photo, setPhoto] = useState()
-    const [team, setTeam] = useState()
 
-    // Register member
-    const [member, setMember] = useState([])
+    const [name, setName] = useState('')
+    const [position, setPosition] = useState('')
+    const [photo, setPhoto] = useState('')
+    const [team, setTeam] = useState('')
+    const [teamName, setTeamName] = useState('')
+    const [teamColor, setTeamColor] = useState('')
 
-    const memberRegister = (member) => {
-        console.log('Nuevo colaborador: ', member)
-    }
+
+    const { memberRegister, createTeam } = props
 
     const sendForm = (event) => {
         event.preventDefault()
@@ -27,102 +29,63 @@ export const Form = (props) => {
         memberRegister(sendData)
     }
 
+    const sendTeam = (event) => {
+        event.preventDefault()
+        createTeam({ title:teamName, background_color:teamColor })
+    }
+
     return (
         <>
-            <section className='formulario'>
+            <section className='form'>
                 <form onSubmit={sendForm}>
                     <h2>Enter member information</h2>
                     <Inputs
                         title='Name'
                         placeholder='Input full name'
+                        required
                         value={name}
-                        changeValue={setName}
+                        setValue={setName}
                     />
                     <Inputs
                         title='Position'
                         placeholder='Input position'
+                        required
                         value={position}
-                        changeValue={setPosition}
+                        setValue={setPosition}
                     />
                     <Inputs
                         title='Photo'
                         placeholder='Photo URL'
+                        required
                         value={photo}
-                        changeValue={setPhoto}
+                        setValue={setPhoto}
                     />
-                    <ListaOpciones value={team} changeValue={setTeam} />
-                    <Boton title='Create Member' />
+                    <OptionList
+                        value={team}
+                        setTeam={setTeam}
+                    />
+                    <Button title='Create Member' />
+                    <AddTeam />
+                </form>
+                <form onSubmit={sendTeam}>
+                    <h2>Enter team information</h2>
+                    <Inputs
+                        title='Team Name'
+                        placeholder='Input team name'
+                        required
+                        value={teamName}
+                        setValue={setTeamName}
+                    />
+                    <Inputs
+                        title='Team color'
+                        placeholder='Input team color in Hex format'
+                        required
+                        value={teamColor}
+                        setValue={setTeamColor}
+                    />
+                    <Button title='Create Team' />
                 </form>
             </section>
         </>
-    )
-}
-
-export const Inputs = ({ title, placeholder }) => {
-
-    const [value, setValue] = useState()
-
-    const changeValue = (event) => {
-        setValue(event.target.value)
-    }
-
-    const modifiedPlaceholder = `${placeholder} . . .`
-
-    return (
-        <>
-            <div className='inputs'>
-                <label htmlFor="">{title}</label>
-                <input
-                    type="text"
-                    placeholder={modifiedPlaceholder}
-                    value={value}
-                    onChange={changeValue}
-                />
-            </div>
-        </>
-    )
-}
-
-Inputs.propTypes = {
-    title: PropTypes.string.isRequired,
-    placeholder: PropTypes.string.isRequired,
-}
-
-export const ListaOpciones = ({ value }) => {
-
-    const changeValue = (event) => {
-        setValue(event.target.value)
-    }
-
-    const equipos = [
-        'Front End',
-        'Back End',
-        'Data Science',
-        'Devops',
-        'QA',
-        'IoT',
-    ]
-    return (
-        <>
-            <div className='options'>
-                <label htmlFor="">Team</label>
-                <select value={value} onChange={changeValue}>
-                    <option value="" disabled defaultValue='' hidden >Select team</option>
-                    {equipos.map((equipo, index) => {
-                        return (
-                            <option key={index} value={equipo}>{equipo}</option>
-                        )
-                    })}
-                </select>
-            </div>
-
-        </>
-    )
-}
-
-
-export const Boton = ({ title }) => {
-    return (
-        <button className='create' > {title} </button>
     )
 }

@@ -1,0 +1,14 @@
+.create {
+    margin: 1rem 1rem 1rem 1rem;
+    font-size: large;
+    height: 2rem;
+    width: 10rem;
+    background-color: black;
+    color: aliceblue;
+    font-weight: 600;
+    cursor: grab;
+}
+
+.create:hover {
+    color: red;
+}
